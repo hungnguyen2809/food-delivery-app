@@ -1,7 +1,9 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useRef, useState} from 'react';
 import {FlatList, StatusBar, Text, TouchableOpacity, View, ViewToken} from 'react-native';
 import {Separator, WelcomeCard} from 'src/components';
-import {Colors, General} from 'src/constants';
+import {Colors, General, SCREEN_NAME} from 'src/constants';
 import {DeviceUtils} from 'src/utils';
 import {styles} from './styles';
 
@@ -19,6 +21,8 @@ const Pagination: React.FC<{activeIndex: number}> = ({activeIndex}) => {
 };
 
 const WellcomeScreen: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   const [activeWelcome, setActiveWelcome] = useState<number>(0);
 
   const welcomeListRef = useRef<FlatList>(null);
@@ -36,6 +40,10 @@ const WellcomeScreen: React.FC = () => {
 
   const onSkipPage = () => {
     welcomeListRef.current?.scrollToEnd();
+  };
+
+  const onGetStatred = () => {
+    navigation.navigate(SCREEN_NAME.SigninScreen);
   };
 
   return (
@@ -65,7 +73,11 @@ const WellcomeScreen: React.FC = () => {
       <Separator height={DeviceUtils.setHeight(8)} />
 
       {activeWelcome === General.WELCOME_CONTENTS.length - 1 ? (
-        <TouchableOpacity style={styles.gettingStartedBtn} activeOpacity={0.8}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onGetStatred}
+          style={styles.gettingStartedBtn}
+        >
           <Text style={styles.gettingStartedText}>Get Started</Text>
         </TouchableOpacity>
       ) : (
