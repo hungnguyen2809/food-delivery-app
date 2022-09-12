@@ -24,4 +24,12 @@ export class DeviceUtils {
   public static fontScale(size: number) {
     return fontScale(size);
   }
+
+  public static setHeight(h: number) {
+    return (height / 100) * h;
+  }
+
+  public static setWidth(w: number) {
+    return (width / 100) * w;
+  }
 }

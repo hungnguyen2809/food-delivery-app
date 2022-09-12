@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.DEFAULT_GREEN,
   },
   image: {
-    width: DeviceUtils.scale(150),
-    height: DeviceUtils.scale(150),
+    width: DeviceUtils.setWidth(30),
+    height: DeviceUtils.setHeight(30),
   },
   lineText: {
     color: Colors.DEFAULT_WHITE,

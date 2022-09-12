@@ -6,4 +6,5 @@ export const DEFAULT_OPTION: NativeStackNavigationOptions = {
 
 export const SCREEN_NAME = {
   SplashScreen: 'SplashScreen',
+  WellcomeScreen: 'WellcomeScreen',
 };
