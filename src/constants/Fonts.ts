@@ -1,3 +1,5 @@
+import {DeviceUtils} from 'src/utils';
+
 export const Fonts = {
   POPPINS_BLACK: 'Poppins-Black',
   POPPINS_BOLD: 'Poppins-Bold',
@@ -8,4 +10,8 @@ export const Fonts = {
   POPPINS_REGULAR: 'Poppins-Regular',
   POPPINS_SEMI_BOLD: 'Poppins-SemiBold',
   POPPINS_THIN: 'Poppins-Thin',
+};
+
+export const FontSize = {
+  DEFAULT: DeviceUtils.scale(14),
 };

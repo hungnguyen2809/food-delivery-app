@@ -4,8 +4,10 @@ export const DEFAULT_OPTION: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-export const SCREEN_NAME = {
-  SplashScreen: 'SplashScreen',
-  WellcomeScreen: 'WellcomeScreen',
-  SigninScreen: 'SigninScreen',
-};
+export enum SCREEN_NAME {
+  SplashScreen = 'SplashScreen',
+  WellcomeScreen = 'WellcomeScreen',
+  SigninScreen = 'SigninScreen',
+  SignUpScreen = 'SignUpScreen',
+  ForgotPasswordScreen = 'ForgotPasswordScreen',
+}

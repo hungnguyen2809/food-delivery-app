@@ -4,28 +4,19 @@ import {Image, StatusBar, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Separator, TextBase, TextInputBase, ToggleButton} from 'src/components';
-import {Colors, Images, SCREEN_NAME} from 'src/constants';
+import {Separator, TextBase, TextInputBase} from 'src/components';
+import {Colors, Images} from 'src/constants';
 import {DeviceUtils} from 'src/utils';
 import {styles} from './styles';
 
-const SigninScreen: React.FC = () => {
+const SignUpScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [showPass, setShowPass] = useState<boolean>(false);
-  const [rePass, setRePass] = useState<boolean>(false);
 
   const onToggleShowPass = () => {
     setShowPass(!showPass);
-  };
-
-  const onNavigateSignUp = () => {
-    navigation.navigate(SCREEN_NAME.SignUpScreen);
-  };
-
-  const onNavigateForgotPass = () => {
-    navigation.navigate(SCREEN_NAME.ForgotPasswordScreen);
   };
 
   return (
@@ -39,19 +30,30 @@ const SigninScreen: React.FC = () => {
           size={DeviceUtils.scale(30)}
           onPress={navigation.goBack}
         />
-        <TextBase style={styles.headerTitle}>Sign in</TextBase>
+        <TextBase style={styles.headerTitle}>Sign Up</TextBase>
       </View>
 
-      <TextBase style={styles.title}>Welcome</TextBase>
-      <TextBase style={styles.content}>
-        Enter your username and password, and enjoy ordering food
-      </TextBase>
+      <TextBase style={styles.title}>Create Account</TextBase>
+      <TextBase style={styles.content}>Enter your email, choose username and password</TextBase>
 
       <TextInputBase
         placeholder="Username"
         iconLeft={
           <Feather
             name="user"
+            color={Colors.DEFAULT_GREY}
+            size={DeviceUtils.scale(22)}
+            style={{marginRight: DeviceUtils.scale(10)}}
+          />
+        }
+      />
+      <Separator height={DeviceUtils.scale(15)} />
+
+      <TextInputBase
+        placeholder="Email"
+        iconLeft={
+          <Feather
+            name="mail"
             color={Colors.DEFAULT_GREY}
             size={DeviceUtils.scale(22)}
             style={{marginRight: DeviceUtils.scale(10)}}
@@ -82,26 +84,9 @@ const SigninScreen: React.FC = () => {
         }
       />
 
-      <View style={styles.forgotPasswordContainer}>
-        <View style={styles.toggleContainer}>
-          <ToggleButton size={0.6} value={rePass} onValueChange={(value) => setRePass(value)} />
-          <TextBase style={styles.rememberMeText}>Remember me</TextBase>
-        </View>
-        <TextBase style={styles.forgotPasswordText} onPress={onNavigateForgotPass}>
-          Forgot Password
-        </TextBase>
-      </View>
-
       <TouchableOpacity style={styles.signinButton}>
-        <TextBase style={styles.signinButtonText}>Sign In</TextBase>
+        <TextBase style={styles.signinButtonText}>Create Account</TextBase>
       </TouchableOpacity>
-
-      <View style={styles.signupContainer}>
-        <TextBase style={styles.accountText}>Don't have an account?</TextBase>
-        <TextBase style={styles.signupText} onPress={onNavigateSignUp}>
-          Sign Up
-        </TextBase>
-      </View>
 
       <TextBase style={styles.orText}>OR</TextBase>
 
@@ -125,4 +110,4 @@ const SigninScreen: React.FC = () => {
   );
 };
 
-export default SigninScreen;
+export default SignUpScreen;

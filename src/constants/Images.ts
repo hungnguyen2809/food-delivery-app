@@ -3,4 +3,6 @@ export const Images = {
   DISCOVER: require('./../assets/images/discover.png'),
   DELIVER: require('./../assets/images/deliver.png'),
   FAVORITE: require('./../assets/images/favorite.png'),
+  GOOGLE: require('./../assets/images/google.png'),
+  FACEBOOK: require('./../assets/images/facebook.png'),
 };
