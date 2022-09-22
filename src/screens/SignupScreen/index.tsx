@@ -5,7 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Separator, TextBase, TextInputBase} from 'src/components';
-import {Colors, Images} from 'src/constants';
+import {Colors, Images, SCREEN_NAME} from 'src/constants';
 import {DeviceUtils} from 'src/utils';
 import {styles} from './styles';
 
@@ -17,6 +17,10 @@ const SignUpScreen: React.FC = () => {
 
   const onToggleShowPass = () => {
     setShowPass(!showPass);
+  };
+
+  const onNavigateRegisterScreen = () => {
+    navigation.navigate(SCREEN_NAME.RegisterPhoneScreen);
   };
 
   return (
@@ -36,55 +40,57 @@ const SignUpScreen: React.FC = () => {
       <TextBase style={styles.title}>Create Account</TextBase>
       <TextBase style={styles.content}>Enter your email, choose username and password</TextBase>
 
-      <TextInputBase
-        placeholder="Username"
-        iconLeft={
-          <Feather
-            name="user"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
-      <Separator height={DeviceUtils.scale(15)} />
+      <View style={styles.inputsContainer}>
+        <TextInputBase
+          placeholder="Username"
+          iconLeft={
+            <Feather
+              name="user"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+        <Separator height={DeviceUtils.scale(15)} />
 
-      <TextInputBase
-        placeholder="Email"
-        iconLeft={
-          <Feather
-            name="mail"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
-      <Separator height={DeviceUtils.scale(15)} />
+        <TextInputBase
+          placeholder="Email"
+          iconLeft={
+            <Feather
+              name="mail"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+        <Separator height={DeviceUtils.scale(15)} />
 
-      <TextInputBase
-        placeholder="Password"
-        secureTextEntry={!showPass}
-        iconLeft={
-          <Feather
-            name="lock"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-        iconRight={
-          <Feather
-            name={showPass ? 'eye-off' : 'eye'}
-            onPress={onToggleShowPass}
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
+        <TextInputBase
+          placeholder="Password"
+          secureTextEntry={!showPass}
+          iconLeft={
+            <Feather
+              name="lock"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+          iconRight={
+            <Feather
+              name={showPass ? 'eye-off' : 'eye'}
+              onPress={onToggleShowPass}
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+      </View>
 
-      <TouchableOpacity style={styles.signinButton}>
+      <TouchableOpacity style={styles.signinButton} onPress={onNavigateRegisterScreen}>
         <TextBase style={styles.signinButtonText}>Create Account</TextBase>
       </TouchableOpacity>
 

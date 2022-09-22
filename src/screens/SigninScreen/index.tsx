@@ -47,40 +47,42 @@ const SigninScreen: React.FC = () => {
         Enter your username and password, and enjoy ordering food
       </TextBase>
 
-      <TextInputBase
-        placeholder="Username"
-        iconLeft={
-          <Feather
-            name="user"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
-      <Separator height={DeviceUtils.scale(15)} />
+      <View style={styles.inputsContainer}>
+        <TextInputBase
+          placeholder="Username"
+          iconLeft={
+            <Feather
+              name="user"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+        <Separator height={DeviceUtils.scale(15)} />
 
-      <TextInputBase
-        placeholder="Password"
-        secureTextEntry={!showPass}
-        iconLeft={
-          <Feather
-            name="lock"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-        iconRight={
-          <Feather
-            name={showPass ? 'eye-off' : 'eye'}
-            onPress={onToggleShowPass}
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
+        <TextInputBase
+          placeholder="Password"
+          secureTextEntry={!showPass}
+          iconLeft={
+            <Feather
+              name="lock"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+          iconRight={
+            <Feather
+              name={showPass ? 'eye-off' : 'eye'}
+              onPress={onToggleShowPass}
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+      </View>
 
       <View style={styles.forgotPasswordContainer}>
         <View style={styles.toggleContainer}>

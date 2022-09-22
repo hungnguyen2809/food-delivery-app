@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHT_GREY,
     paddingVertical: DeviceUtils.scale(10),
     paddingHorizontal: DeviceUtils.scale(20),
-    marginHorizontal: DeviceUtils.scale(20),
   },
   inputSubContainer: {
     flexDirection: 'row',
@@ -75,6 +74,6 @@ const styles = StyleSheet.create({
   },
   wrapTextError: {
     marginTop: DeviceUtils.scale(3),
-    marginHorizontal: DeviceUtils.scale(25),
+    marginHorizontal: DeviceUtils.scale(5),
   },
 });

@@ -36,6 +36,9 @@ export const styles = StyleSheet.create({
     marginBottom: DeviceUtils.scale(20),
     marginHorizontal: DeviceUtils.scale(20),
   },
+  inputsContainer: {
+    marginHorizontal: DeviceUtils.scale(20),
+  },
   forgotPasswordContainer: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -4,6 +4,7 @@ import React from 'react';
 import {DEFAULT_OPTION, SCREEN_NAME} from 'src/constants';
 import {
   ForgotPasswordScreen,
+  RegisterPhoneScreen,
   SigninScreen,
   SignUpScreen,
   SplashScreen,
@@ -21,6 +22,7 @@ const AppNavigation: React.FC = () => {
         <Stack.Screen name={SCREEN_NAME.SigninScreen} component={SigninScreen} />
         <Stack.Screen name={SCREEN_NAME.SignUpScreen} component={SignUpScreen} />
         <Stack.Screen name={SCREEN_NAME.ForgotPasswordScreen} component={ForgotPasswordScreen} />
+        <Stack.Screen name={SCREEN_NAME.RegisterPhoneScreen} component={RegisterPhoneScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
