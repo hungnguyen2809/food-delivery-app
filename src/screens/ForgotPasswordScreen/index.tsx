@@ -32,18 +32,20 @@ const ForgotPasswordScreen: React.FC = () => {
         Enter your email, so that we can help you to recover your password
       </TextBase>
 
-      <TextInputBase
-        placeholder="Email"
-        iconLeft={
-          <Feather
-            name="mail"
-            color={Colors.DEFAULT_GREY}
-            size={DeviceUtils.scale(22)}
-            style={{marginRight: DeviceUtils.scale(10)}}
-          />
-        }
-      />
-      <Separator height={DeviceUtils.scale(15)} />
+      <View style={styles.inputsContainer}>
+        <TextInputBase
+          placeholder="Email"
+          iconLeft={
+            <Feather
+              name="mail"
+              color={Colors.DEFAULT_GREY}
+              size={DeviceUtils.scale(22)}
+              style={{marginRight: DeviceUtils.scale(10)}}
+            />
+          }
+        />
+        <Separator height={DeviceUtils.scale(15)} />
+      </View>
 
       <TouchableOpacity style={styles.signinButton}>
         <TextBase style={styles.signinButtonText}>Reset Password</TextBase>
