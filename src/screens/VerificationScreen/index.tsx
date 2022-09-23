@@ -53,6 +53,7 @@ const VerificationScreen: React.FC = () => {
             maxLength={1}
             value={otp[1]}
             style={styles.otpTextInput}
+            selectionColor={Colors.DEFAULT_GREEN}
             keyboardType="number-pad"
             onChangeText={(text) => {
               text && secondInput.current?.focus();
@@ -66,6 +67,7 @@ const VerificationScreen: React.FC = () => {
             maxLength={1}
             value={otp[2]}
             style={styles.otpTextInput}
+            selectionColor={Colors.DEFAULT_GREEN}
             keyboardType="number-pad"
             onChangeText={(text) => {
               text ? thirdInput.current?.focus() : firstInput.current?.focus();
@@ -79,6 +81,7 @@ const VerificationScreen: React.FC = () => {
             maxLength={1}
             value={otp[3]}
             style={styles.otpTextInput}
+            selectionColor={Colors.DEFAULT_GREEN}
             keyboardType="number-pad"
             onChangeText={(text) => {
               text ? fourthInput.current?.focus() : secondInput.current?.focus();
@@ -92,6 +95,7 @@ const VerificationScreen: React.FC = () => {
             maxLength={1}
             value={otp[4]}
             style={styles.otpTextInput}
+            selectionColor={Colors.DEFAULT_GREEN}
             keyboardType="number-pad"
             onChangeText={(text) => {
               !text && thirdInput.current?.focus();
