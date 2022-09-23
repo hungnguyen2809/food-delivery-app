@@ -56,10 +56,31 @@ export const styles = StyleSheet.create({
   },
   otpTextInput: {
     textAlign: 'center',
-    fontSize: DeviceUtils.scale(25),
+    color: Colors.DEFAULT_BLACK,
     width: DeviceUtils.scale(55),
     height: DeviceUtils.scale(55),
-    // paddingHorizontal: DeviceUtils.scale(25),
-    // paddingVertical: DeviceUtils.scale(15),
+    fontSize: DeviceUtils.scale(25),
+  },
+  resendCodeContainer: {
+    marginHorizontal: DeviceUtils.scale(20),
+  },
+  resendCodeText: {
+    color: Colors.DEFAULT_GREEN,
+    fontFamily: Fonts.POPPINS_SEMI_BOLD,
+  },
+  signinButton: {
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: DeviceUtils.scale(50),
+    marginTop: DeviceUtils.scale(20),
+    backgroundColor: Colors.DEFAULT_GREEN,
+    marginHorizontal: DeviceUtils.scale(20),
+  },
+  signinButtonText: {
+    color: Colors.DEFAULT_WHITE,
+    fontFamily: Fonts.POPPINS_MEDIUM,
+    fontSize: DeviceUtils.fontScale(18),
+    lineHeight: DeviceUtils.fontScale(18) * 1.4,
   },
 });
