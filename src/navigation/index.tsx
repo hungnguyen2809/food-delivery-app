@@ -8,6 +8,7 @@ import {
   SigninScreen,
   SignUpScreen,
   SplashScreen,
+  VerificationScreen,
   WellcomeScreen,
 } from 'src/screens';
 
@@ -23,6 +24,7 @@ const AppNavigation: React.FC = () => {
         <Stack.Screen name={SCREEN_NAME.SignUpScreen} component={SignUpScreen} />
         <Stack.Screen name={SCREEN_NAME.ForgotPasswordScreen} component={ForgotPasswordScreen} />
         <Stack.Screen name={SCREEN_NAME.RegisterPhoneScreen} component={RegisterPhoneScreen} />
+        <Stack.Screen name={SCREEN_NAME.VerificationScreen} component={VerificationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

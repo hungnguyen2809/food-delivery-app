@@ -15,7 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StaticImageApi} from 'src/api';
 import {CountryCode} from 'src/assets/data';
 import {Separator, TextBase, TextInputBase} from 'src/components';
-import {Colors, GlobalStyles} from 'src/constants';
+import {Colors, GlobalStyles, SCREEN_NAME} from 'src/constants';
 import {DeviceUtils} from 'src/utils';
 import FlagItem from './FlagItem';
 import {styles} from './styles';
@@ -34,6 +34,7 @@ const RegisterPhoneScreen: React.FC = () => {
   });
   const [openDropdown, setOpenDropdown] = useState(false);
   const [inputsContainerY, setInputsContainerY] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const onClickCountry = (data: {name: string; dial_code: string | null; code: string}) => {
     setSelectedCountry(data);
@@ -44,6 +45,12 @@ const RegisterPhoneScreen: React.FC = () => {
     if (openDropdown) {
       setOpenDropdown(false);
     }
+  };
+
+  const onNavigateVerifiOtp = () => {
+    navigation.navigate(SCREEN_NAME.VerificationScreen, {
+      phone: selectedCountry?.dial_code + phoneNumber,
+    });
   };
 
   return (
@@ -94,12 +101,14 @@ const RegisterPhoneScreen: React.FC = () => {
             <TextInputBase
               placeholder="Phone number..."
               keyboardType="number-pad"
+              value={phoneNumber}
               onFocus={closeDropdown}
+              onChangeText={setPhoneNumber}
             />
           </View>
         </View>
 
-        <TouchableOpacity style={styles.signinButton}>
+        <TouchableOpacity style={styles.signinButton} onPress={onNavigateVerifiOtp}>
           <TextBase style={styles.signinButtonText}>Continue</TextBase>
         </TouchableOpacity>
 

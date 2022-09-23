@@ -11,4 +11,5 @@ export enum SCREEN_NAME {
   SignUpScreen = 'SignUpScreen',
   ForgotPasswordScreen = 'ForgotPasswordScreen',
   RegisterPhoneScreen = 'RegisterPhoneScreen',
+  VerificationScreen = 'VerificationScreen',
 }
