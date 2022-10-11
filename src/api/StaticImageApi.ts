@@ -1,7 +1,5 @@
-import {ApiConstants} from '.';
+import {COUNTRY_FLAG} from './constants';
 
-const getFlagIcon = (code = 'VN', type = ApiConstants.COUNTRY_FLAG.TYPE.PNG) => {
-  return `${ApiConstants.COUNTRY_FLAG.BASE_URL}/${type}/${code}`;
+export const getFlagIcon = (code = 'VN', type = COUNTRY_FLAG.TYPE.PNG) => {
+  return `${COUNTRY_FLAG.BASE_URL}/${type}/${code}`;
 };
-
-export {getFlagIcon};

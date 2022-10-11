@@ -1,17 +1,38 @@
+import {yupResolver} from '@hookform/resolvers/yup';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {Image, StatusBar, TouchableOpacity, View} from 'react-native';
+import {Controller, useForm} from 'react-hook-form';
+import {Image, Keyboard, StatusBar, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useAppDispatch} from 'src/app/hooks';
 import {Separator, TextBase, TextInputBase, ToggleButton} from 'src/components';
 import {Colors, Images, SCREEN_NAME} from 'src/constants';
+import {actionAuthLogin} from 'src/redux/auth/actions';
 import {DeviceUtils} from 'src/utils';
+import * as yup from 'yup';
 import {styles} from './styles';
 
+interface LoginForm {
+  username: string;
+  password: string;
+}
+
+const schame = yup.object().shape({
+  username: yup.string().required('Please enter username'),
+  password: yup.string().required('Please enter password'),
+});
+
 const SigninScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
+
+  const {control, handleSubmit} = useForm<LoginForm>({
+    defaultValues: {username: '', password: ''},
+    resolver: yupResolver(schame),
+  });
 
   const [showPass, setShowPass] = useState<boolean>(false);
   const [rePass, setRePass] = useState<boolean>(false);
@@ -26,6 +47,15 @@ const SigninScreen: React.FC = () => {
 
   const onNavigateForgotPass = () => {
     navigation.navigate(SCREEN_NAME.ForgotPasswordScreen);
+  };
+
+  const handleSubmitLoginForm = async (data: LoginForm) => {
+    try {
+      Keyboard.dismiss();
+      await dispatch(actionAuthLogin(data)).unwrap();
+    } catch (error) {
+      //
+    }
   };
 
   return (
@@ -48,39 +78,61 @@ const SigninScreen: React.FC = () => {
       </TextBase>
 
       <View style={styles.inputsContainer}>
-        <TextInputBase
-          placeholder="Username"
-          iconLeft={
-            <Feather
-              name="user"
-              color={Colors.DEFAULT_GREY}
-              size={DeviceUtils.scale(22)}
-              style={{marginRight: DeviceUtils.scale(10)}}
+        <Controller
+          control={control}
+          name="username"
+          render={({field, fieldState: {error}}) => (
+            <TextInputBase
+              ref={field.ref}
+              value={field.value}
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              errorText={error?.message}
+              placeholder="Username"
+              iconLeft={
+                <Feather
+                  name="user"
+                  color={Colors.DEFAULT_GREY}
+                  size={DeviceUtils.scale(22)}
+                  style={{marginRight: DeviceUtils.scale(10)}}
+                />
+              }
             />
-          }
+          )}
         />
         <Separator height={DeviceUtils.scale(15)} />
 
-        <TextInputBase
-          placeholder="Password"
-          secureTextEntry={!showPass}
-          iconLeft={
-            <Feather
-              name="lock"
-              color={Colors.DEFAULT_GREY}
-              size={DeviceUtils.scale(22)}
-              style={{marginRight: DeviceUtils.scale(10)}}
+        <Controller
+          control={control}
+          name="password"
+          render={({field, fieldState: {error}}) => (
+            <TextInputBase
+              ref={field.ref}
+              value={field.value}
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              errorText={error?.message}
+              placeholder="Password"
+              secureTextEntry={!showPass}
+              iconLeft={
+                <Feather
+                  name="lock"
+                  color={Colors.DEFAULT_GREY}
+                  size={DeviceUtils.scale(22)}
+                  style={{marginRight: DeviceUtils.scale(10)}}
+                />
+              }
+              iconRight={
+                <Feather
+                  name={showPass ? 'eye-off' : 'eye'}
+                  onPress={onToggleShowPass}
+                  color={Colors.DEFAULT_GREY}
+                  size={DeviceUtils.scale(22)}
+                  style={{marginRight: DeviceUtils.scale(10)}}
+                />
+              }
             />
-          }
-          iconRight={
-            <Feather
-              name={showPass ? 'eye-off' : 'eye'}
-              onPress={onToggleShowPass}
-              color={Colors.DEFAULT_GREY}
-              size={DeviceUtils.scale(22)}
-              style={{marginRight: DeviceUtils.scale(10)}}
-            />
-          }
+          )}
         />
       </View>
 
@@ -94,7 +146,7 @@ const SigninScreen: React.FC = () => {
         </TextBase>
       </View>
 
-      <TouchableOpacity style={styles.signinButton}>
+      <TouchableOpacity style={styles.signinButton} onPress={handleSubmit(handleSubmitLoginForm)}>
         <TextBase style={styles.signinButtonText}>Sign In</TextBase>
       </TouchableOpacity>
 
