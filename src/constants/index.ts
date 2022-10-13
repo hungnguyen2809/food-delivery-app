@@ -3,4 +3,4 @@ export * from './Fonts';
 export * from './General';
 export * from './GlobalStyles';
 export * from './Images';
-export * from './ScreenName';
+export * from './Navigation';

@@ -1,18 +1,20 @@
 import {yupResolver} from '@hookform/resolvers/yup';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import * as yup from 'yup';
-import {Image, StatusBar, TouchableOpacity, View} from 'react-native';
+import {Image, Keyboard, StatusBar, TouchableOpacity, View} from 'react-native';
+import {Snackbar} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Separator, TextBase, TextInputBase} from 'src/components';
-import {Colors, Images, SCREEN_NAME} from 'src/constants';
-import {DeviceUtils} from 'src/utils';
-import {styles} from './styles';
 import {useAppDispatch} from 'src/app/hooks';
+import {Separator, TextBase, TextInputBase} from 'src/components';
+import {Colors, Images} from 'src/constants';
 import {actionAuthRegister} from 'src/redux/auth/actions';
+import {DeviceUtils, getMessageError} from 'src/utils';
+import * as yup from 'yup';
+import {styles} from './styles';
 
 interface FormRegister {
   username: string;
@@ -37,20 +39,31 @@ const SignUpScreen: React.FC = () => {
   });
 
   const [showPass, setShowPass] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [snackbar, setSnackbar] = useState({visible: false, message: ''});
 
   const onToggleShowPass = () => {
     setShowPass(!showPass);
   };
 
-  const onNavigateRegisterScreen = () => {
-    navigation.navigate(SCREEN_NAME.RegisterPhoneScreen);
+  const onDismissSnackbar = () => {
+    setSnackbar({visible: false, message: ''});
   };
 
+  // const onNavigateRegisterScreen = () => {
+  //   navigation.navigate(SCREEN_NAME.RegisterPhoneScreen);
+  // };
+
   const handleSubmitRegister = async (dataForm: FormRegister) => {
+    Keyboard.dismiss();
     try {
+      setLoading(true);
       await dispatch(actionAuthRegister(dataForm)).unwrap();
+      setLoading(false);
+      navigation.goBack();
     } catch (error) {
-      //
+      setLoading(false);
+      setSnackbar({visible: true, message: getMessageError(error)});
     }
   };
 
@@ -159,7 +172,11 @@ const SignUpScreen: React.FC = () => {
         // onPress={onNavigateRegisterScreen}
         onPress={handleSubmit(handleSubmitRegister)}
       >
-        <TextBase style={styles.signinButtonText}>Create Account</TextBase>
+        {loading ? (
+          <LottieView source={Images.LOADING} autoPlay loop />
+        ) : (
+          <TextBase style={styles.signinButtonText}>Create Account</TextBase>
+        )}
       </TouchableOpacity>
 
       <TextBase style={styles.orText}>OR</TextBase>
@@ -180,6 +197,10 @@ const SignUpScreen: React.FC = () => {
           <TextBase style={styles.socialSigninButtonText}>Connect with Google</TextBase>
         </View>
       </TouchableOpacity>
+
+      <Snackbar duration={3000} visible={snackbar.visible} onDismiss={onDismissSnackbar}>
+        {snackbar.message}
+      </Snackbar>
     </View>
   );
 };

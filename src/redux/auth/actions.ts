@@ -1,8 +1,12 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {appRequest, APP_PATH} from 'src/api';
-import {getMessageError} from 'src/utils';
+import {getMessageError, removeDataStorage, setDataStorage, STORAGE_KEY} from 'src/utils';
 
 const PREFIX = 'auth';
+
+export const actionAuthSetUserInfo = createAction<Auth.UserInfo | undefined>(
+  `${PREFIX}/actionAuthSetUserInfo`,
+);
 
 export const actionAuthLogin = createAsyncThunk(
   `${PREFIX}/actionAuthLogin`,
@@ -12,7 +16,22 @@ export const actionAuthLogin = createAsyncThunk(
       if (data.status) {
         return rejectWithValue(data);
       }
+      await setDataStorage(STORAGE_KEY.ACCESS_TOKEN, data.data.token);
+      await setDataStorage(STORAGE_KEY.USER_INFO, data.data);
       return data.data;
+    } catch (error) {
+      return rejectWithValue(getMessageError(error));
+    }
+  },
+);
+
+export const actionAuthLogout = createAsyncThunk(
+  `${PREFIX}/actionAuthLogout`,
+  async (_, {rejectWithValue, dispatch}) => {
+    try {
+      await removeDataStorage(STORAGE_KEY.ACCESS_TOKEN);
+      await removeDataStorage(STORAGE_KEY.USER_INFO);
+      dispatch(actionAuthSetUserInfo(undefined));
     } catch (error) {
       return rejectWithValue(getMessageError(error));
     }

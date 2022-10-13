@@ -1,8 +1,10 @@
 import {yupResolver} from '@hookform/resolvers/yup';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Image, Keyboard, StatusBar, TouchableOpacity, View} from 'react-native';
+import {Snackbar} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -10,7 +12,7 @@ import {useAppDispatch} from 'src/app/hooks';
 import {Separator, TextBase, TextInputBase, ToggleButton} from 'src/components';
 import {Colors, Images, SCREEN_NAME} from 'src/constants';
 import {actionAuthLogin} from 'src/redux/auth/actions';
-import {DeviceUtils} from 'src/utils';
+import {DeviceUtils, getMessageError} from 'src/utils';
 import * as yup from 'yup';
 import {styles} from './styles';
 
@@ -36,9 +38,15 @@ const SigninScreen: React.FC = () => {
 
   const [showPass, setShowPass] = useState<boolean>(false);
   const [rePass, setRePass] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [snackbar, setSnackbar] = useState({visible: false, message: ''});
 
   const onToggleShowPass = () => {
     setShowPass(!showPass);
+  };
+
+  const onDismissSnackbar = () => {
+    setSnackbar({visible: false, message: ''});
   };
 
   const onNavigateSignUp = () => {
@@ -52,9 +60,12 @@ const SigninScreen: React.FC = () => {
   const handleSubmitLoginForm = async (data: LoginForm) => {
     try {
       Keyboard.dismiss();
+      setLoading(true);
       await dispatch(actionAuthLogin(data)).unwrap();
+      setLoading(false);
     } catch (error) {
-      //
+      setSnackbar({visible: true, message: getMessageError(error)});
+      setLoading(false);
     }
   };
 
@@ -147,7 +158,11 @@ const SigninScreen: React.FC = () => {
       </View>
 
       <TouchableOpacity style={styles.signinButton} onPress={handleSubmit(handleSubmitLoginForm)}>
-        <TextBase style={styles.signinButtonText}>Sign In</TextBase>
+        {loading ? (
+          <LottieView source={Images.LOADING} autoPlay loop />
+        ) : (
+          <TextBase style={styles.signinButtonText}>Sign In</TextBase>
+        )}
       </TouchableOpacity>
 
       <View style={styles.signupContainer}>
@@ -175,6 +190,10 @@ const SigninScreen: React.FC = () => {
           <TextBase style={styles.socialSigninButtonText}>Connect with Google</TextBase>
         </View>
       </TouchableOpacity>
+
+      <Snackbar duration={3000} visible={snackbar.visible} onDismiss={onDismissSnackbar}>
+        {snackbar.message}
+      </Snackbar>
     </View>
   );
 };
