@@ -18,3 +18,18 @@ export const actionAuthLogin = createAsyncThunk(
     }
   },
 );
+
+export const actionAuthRegister = createAsyncThunk(
+  `${PREFIX}/actionAuthRegister`,
+  async (payload: {username: string; password: string; email: string}, {rejectWithValue}) => {
+    try {
+      const {data} = await appRequest.post<BaseResponse>(APP_PATH.register, payload);
+      if (data.status) {
+        return rejectWithValue(data);
+      }
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(getMessageError(error));
+    }
+  },
+);

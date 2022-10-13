@@ -5,4 +5,5 @@ export const Images = {
   FAVORITE: require('./../assets/images/favorite.png'),
   GOOGLE: require('./../assets/images/google.png'),
   FACEBOOK: require('./../assets/images/facebook.png'),
+  LOADING: require('./../assets/lotties/loading.json'),
 };
