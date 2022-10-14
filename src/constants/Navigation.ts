@@ -6,7 +6,6 @@ export const DEFAULT_OPTION: NativeStackNavigationOptions = {
 
 export enum SCREEN_NAME {
   SplashScreen = 'SplashScreen',
-  MainNavigationScreen = 'MainNavigationScreen',
 
   WellcomeScreen = 'WellcomeScreen',
   SigninScreen = 'SigninScreen',

@@ -1,5 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from 'src/app/hooks';
 import {actionAuthSetUserInfo} from 'src/redux/auth/actions';
 import {selectorAuthToken} from 'src/redux/auth/selectors';
@@ -15,9 +15,9 @@ const MainNavigation: React.FC = () => {
 
 const AppNavigation: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [showSplash, setShowSplash] = useState<boolean>(true);
+  const [showSplash, setShowSplash] = useState(true);
 
-  const onReady = async () => {
+  const onReady = useCallback(async () => {
     const userInfo = await getDataStorage<Auth.UserInfo>(STORAGE_KEY.USER_INFO);
     if (userInfo && userInfo.token) {
       dispatch(actionAuthSetUserInfo(userInfo));
@@ -26,11 +26,19 @@ const AppNavigation: React.FC = () => {
     setTimeout(() => {
       setShowSplash(false);
     }, 2000);
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    onReady();
+  }, [onReady]);
+
+  if (showSplash) {
+    return <SplashScreen />;
+  }
 
   return (
-    <NavigationContainer onReady={onReady}>
-      {showSplash ? <SplashScreen /> : <MainNavigation />}
+    <NavigationContainer>
+      <MainNavigation />
     </NavigationContainer>
   );
 };
