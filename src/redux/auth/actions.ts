@@ -52,3 +52,18 @@ export const actionAuthRegister = createAsyncThunk(
     }
   },
 );
+
+export const actionAuthGetUserInfo = createAsyncThunk(
+  `${PREFIX}/actionAuthGetUserInfo`,
+  async (payload: {username: string}, {rejectWithValue}) => {
+    try {
+      const {data} = await appRequest.get<BaseResponse>(APP_PATH.getInfo, {params: payload});
+      if (data.status) {
+        throw rejectWithValue(data);
+      }
+      return data.data;
+    } catch (error) {
+      throw new Error(getMessageError(error));
+    }
+  },
+);

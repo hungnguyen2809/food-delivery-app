@@ -1,33 +1,36 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Button} from 'react-native-paper';
-import {useAppDispatch} from 'src/app/hooks';
-import {actionAuthLogout} from 'src/redux/auth/actions';
+import {StatusBar, Text, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import {Separator} from 'src/components';
+import {Colors} from 'src/constants';
+import {styles} from './styles';
 
 const HomeScreen: React.FC = () => {
-  const dispatch = useAppDispatch();
-
-  const onLogout = () => {
-    dispatch(actionAuthLogout());
-  };
-
+  const inset = useSafeAreaInsets();
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <StatusBar translucent barStyle="light-content" backgroundColor={Colors.DEFAULT_GREEN} />
+      <Separator height={inset.top} />
 
-      <Button mode="contained" onPress={onLogout}>
-        Logout
-      </Button>
+      <View style={styles.headerContainer}>
+        <View style={styles.locationContainer}>
+          <Ionicons name="location-outline" size={15} color={Colors.DEFAULT_WHITE} />
+          <Text></Text>
+          <Text></Text>
+          <MaterialIcons />
+          <Feather />
+          <View>
+            <Text></Text>
+          </View>
+        </View>
+      </View>
+
+      <Text>HomeScreen</Text>
     </View>
   );
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
