@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Dispatch, SetStateAction} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {TextBase} from 'src/components';
 import {Colors, Fonts, Images} from 'src/constants';
 import {fontScale, scale} from 'src/utils';
 
@@ -18,9 +19,9 @@ const CategoryMenuItem: React.FC<Props> = ({logo, name, activeCategory, setActiv
       style={[styles.category, {opacity: activeCategory === name ? 1 : 0.5}]}
     >
       <Image source={Images[logo as keyof typeof Images]} style={styles.categoryIcon} />
-      <Text style={[styles.categoryText, {opacity: activeCategory === name ? 1 : 0.5}]}>
+      <TextBase style={[styles.categoryText, {opacity: activeCategory === name ? 1 : 0.5}]}>
         {name}
-      </Text>
+      </TextBase>
     </TouchableOpacity>
   );
 };

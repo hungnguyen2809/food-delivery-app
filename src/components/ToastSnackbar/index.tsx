@@ -19,7 +19,7 @@ export class ToastSnackbar extends Component<ToastSnackbarProps, ToastSnackbarSt
     this.state = {message: '', visible: false};
   }
 
-  static openSnackbar = (message: string, options?: OptionSnack) => {
+  static open = (message: string, options?: OptionSnack) => {
     ToastSnackbar.options = {...DEFAULT_OPTION, ...options};
     ToastSnackbar.snackbar.onOpenSnackbar(message);
   };

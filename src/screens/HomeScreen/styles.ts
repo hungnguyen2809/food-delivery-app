@@ -84,4 +84,52 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  listContainer: {
+    paddingVertical: scale(5),
+    zIndex: -5,
+  },
+  horizontalListContainer: {
+    marginTop: scale(30),
+  },
+  listHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: scale(20),
+    marginBottom: scale(5),
+  },
+  listHeaderTitle: {
+    color: Colors.DEFAULT_BLACK,
+    fontSize: fontScale(16),
+    lineHeight: fontScale(16) * 1.4,
+    fontFamily: Fonts.POPPINS_MEDIUM,
+  },
+  listHeaderSubtitle: {
+    color: Colors.DEFAULT_YELLOW,
+    fontSize: fontScale(13),
+    lineHeight: fontScale(13) * 1.4,
+    fontFamily: Fonts.POPPINS_MEDIUM,
+  },
+  sortListContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: Colors.DEFAULT_WHITE,
+    marginTop: scale(8),
+    elevation: 1,
+  },
+  sortListItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.DEFAULT_YELLOW,
+    height: scale(40),
+  },
+  sortListItemText: {
+    color: Colors.DEFAULT_BLACK,
+    fontSize: fontScale(13),
+    lineHeight: fontScale(13) * 1.4,
+    fontFamily: Fonts.POPPINS_SEMI_BOLD,
+  },
 });
