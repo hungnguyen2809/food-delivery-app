@@ -50,7 +50,7 @@ const WellcomeScreen: React.FC = () => {
     <View style={styles.container}>
       <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.DEFAULT_WHITE} />
 
-      <Separator height={StatusBar.currentHeight} />
+      <Separator safeTop />
       <Separator height={DeviceUtils.setHeight(8)} />
 
       <View style={styles.welcomeListContainer}>

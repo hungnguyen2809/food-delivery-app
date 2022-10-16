@@ -1,7 +1,6 @@
 import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useMemo, useRef, useState} from 'react';
 import {StatusBar, TextInput, TouchableOpacity, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Separator, TextBase} from 'src/components';
 import {Colors} from 'src/constants';
@@ -14,7 +13,6 @@ type ParamsRoute = {
 
 const VerificationScreen: React.FC = () => {
   const route = useRoute();
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
   const params = useMemo(() => route.params, [route.params]) as Readonly<ParamsRoute | undefined>;
 
@@ -28,7 +26,7 @@ const VerificationScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.DEFAULT_WHITE} />
-      <Separator height={insets.top} />
+      <Separator safeTop />
 
       <View style={styles.headerContainer}>
         <Ionicons

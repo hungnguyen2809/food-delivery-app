@@ -4,7 +4,6 @@ import LottieView from 'lottie-react-native';
 import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Image, Keyboard, StatusBar, TouchableOpacity, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useAppDispatch} from 'src/app/hooks';
@@ -27,7 +26,6 @@ const schame = yup.object().shape({
 
 const SigninScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
 
   const {control, handleSubmit} = useForm<LoginForm>({
@@ -66,7 +64,7 @@ const SigninScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.DEFAULT_WHITE} />
-      <Separator height={insets.top} />
+      <Separator safeTop />
 
       <View style={styles.headerContainer}>
         <Ionicons

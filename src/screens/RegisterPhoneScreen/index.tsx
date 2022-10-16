@@ -10,7 +10,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StaticImageApi} from 'src/api';
 import {CountryCode} from 'src/assets/data';
@@ -26,7 +25,6 @@ const getDropdownStyle = (y: number): ViewStyle => ({
 });
 
 const RegisterPhoneScreen: React.FC = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [selectedCountry, setSelectedCountry] = useState(() => {
@@ -63,7 +61,7 @@ const RegisterPhoneScreen: React.FC = () => {
     >
       <View style={styles.container}>
         <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.DEFAULT_WHITE} />
-        <Separator height={insets.top} />
+        <Separator safeTop />
 
         <View style={styles.headerContainer}>
           <Ionicons

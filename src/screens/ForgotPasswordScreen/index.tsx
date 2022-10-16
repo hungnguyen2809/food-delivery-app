@@ -1,7 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar, TouchableOpacity, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Separator, TextBase, TextInputBase} from 'src/components';
@@ -10,13 +9,12 @@ import {DeviceUtils} from 'src/utils';
 import {styles} from './styles';
 
 const ForgotPasswordScreen: React.FC = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<any>>();
 
   return (
     <View style={styles.container}>
       <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.DEFAULT_WHITE} />
-      <Separator height={insets.top} />
+      <Separator safeTop />
 
       <View style={styles.headerContainer}>
         <Ionicons
