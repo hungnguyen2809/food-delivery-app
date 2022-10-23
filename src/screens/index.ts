@@ -1,6 +1,7 @@
 import ForgotPasswordScreen from './ForgotPasswordScreen';
 import HomeScreen from './HomeScreen';
 import RegisterPhoneScreen from './RegisterPhoneScreen';
+import RestaurantScreen from './RestaurantScreen';
 import SigninScreen from './SigninScreen';
 import SignUpScreen from './SignupScreen';
 import SplashScreen from './SplashScreen';
@@ -16,4 +17,5 @@ export {
   RegisterPhoneScreen,
   VerificationScreen,
   HomeScreen,
+  RestaurantScreen,
 };

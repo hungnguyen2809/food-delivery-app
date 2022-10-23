@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useAppDispatch, useAppSelector} from 'src/app/hooks';
 import {Separator, TextBase, ToastSnackbar} from 'src/components';
-import {Colors, General} from 'src/constants';
+import {Colors, General, SCREEN_NAME} from 'src/constants';
 import {actionRestaurentList} from 'src/redux/restaurent/actions';
 import {selectorRestaurentList} from 'src/redux/restaurent/selectors';
 import {getMessageError, scale, setHeight} from 'src/utils';
@@ -41,6 +41,10 @@ const HomeScreen: React.FC = () => {
 
     return unsubscribe;
   }, [dispatch, navigation]);
+
+  const handleNavigateRestaurent = (restaurentId: string) => {
+    navigation.navigate(SCREEN_NAME.RestaurantScreen, {restaurentId});
+  };
 
   return (
     <View style={styles.container}>
@@ -100,7 +104,9 @@ const HomeScreen: React.FC = () => {
             horizontal
             data={listRestaurent}
             keyExtractor={(item) => item._id}
-            renderItem={({item}) => <RestaurentCard row={item} />}
+            renderItem={({item}) => (
+              <RestaurentCard row={item} onNavigate={handleNavigateRestaurent} />
+            )}
             ListHeaderComponent={() => <Separator width={20} />}
             ListFooterComponent={() => <Separator width={20} />}
             ItemSeparatorComponent={() => <Separator width={10} />}

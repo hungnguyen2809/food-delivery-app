@@ -9,14 +9,19 @@ import {fontScale, scale} from 'src/utils';
 
 type RestaurentCardProps = {
   row: Restaurent.RestaurentRow;
+  onNavigate: (restaurentId: string) => void;
 };
 
 const WIDTH_POSTER = 1920;
 const HEIGHT_POSTER = 1080;
 
-const RestaurentCard: React.FC<RestaurentCardProps> = ({row}) => {
+const RestaurentCard: React.FC<RestaurentCardProps> = ({row, onNavigate}) => {
+  const handleNavigate = () => {
+    onNavigate(row.id);
+  };
+
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={handleNavigate}>
       <Ionicons
         // name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
         name="bookmark"

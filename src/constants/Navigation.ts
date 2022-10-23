@@ -15,4 +15,5 @@ export enum SCREEN_NAME {
   VerificationScreen = 'VerificationScreen',
 
   HomeScreen = 'HomeScreen',
+  RestaurantScreen = 'RestaurantScreen',
 }

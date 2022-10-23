@@ -15,4 +15,17 @@ declare namespace Restaurent {
     time: number;
     categories: string[];
   }
+
+  interface FoodRow {
+    id?: string;
+    restaurantId?: string;
+    name?: string;
+    price?: number;
+    image?: string;
+    category?: string;
+    description?: string;
+    ingredients?: string;
+  }
+
+  type RestaurentFood = RestaurentRow & {foods: FoodRow[]};
 }

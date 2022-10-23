@@ -21,3 +21,21 @@ export const actionRestaurentList = createAsyncThunk(
     }
   },
 );
+
+export const actionRestaurentGetOne = createAsyncThunk(
+  `${PREFIX}/actionRestaurentGetOne`,
+  async ({restaurentId}: {restaurentId: string}, {rejectWithValue}) => {
+    try {
+      const {data} = await appRequest.get<BaseResponse<Restaurent.RestaurentFood>>(
+        APP_PATH.restaurentGetById + '/' + restaurentId,
+      );
+      if (data.status) {
+        return rejectWithValue(data);
+      }
+
+      return data.data;
+    } catch (error) {
+      throw new Error(getMessageError(error));
+    }
+  },
+);

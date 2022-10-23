@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 
 const OnboardingStack: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName={SCREEN_NAME.WellcomeScreen} screenOptions={DEFAULT_OPTION}>
+    <Stack.Navigator screenOptions={DEFAULT_OPTION}>
       <Stack.Screen name={SCREEN_NAME.WellcomeScreen} component={WellcomeScreen} />
       <Stack.Screen name={SCREEN_NAME.SigninScreen} component={SigninScreen} />
       <Stack.Screen name={SCREEN_NAME.SignUpScreen} component={SignUpScreen} />

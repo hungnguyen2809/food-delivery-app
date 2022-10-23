@@ -55,6 +55,7 @@ const SigninScreen: React.FC = () => {
       setLoading(true);
       await dispatch(actionAuthLogin(data)).unwrap();
       setLoading(false);
+      ToastSnackbar.open('Đăng nhập thành công');
     } catch (error) {
       ToastSnackbar.open(getMessageError(error));
       setLoading(false);

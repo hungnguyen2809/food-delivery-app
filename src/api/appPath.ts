@@ -6,4 +6,5 @@ export const APP_PATH = {
   getInfo: '/api/v1/user/get-info',
   //restaurent
   restaurentGetAll: '/api/v1/restaurent/get-all',
+  restaurentGetById: '/api/v1/restaurent/get-by-id',
 };
