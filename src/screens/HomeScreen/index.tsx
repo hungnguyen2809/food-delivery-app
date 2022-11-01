@@ -10,7 +10,7 @@ import {Separator, TextBase, ToastSnackbar} from 'src/components';
 import {Colors, General, SCREEN_NAME} from 'src/constants';
 import {actionRestaurentList} from 'src/redux/restaurent/actions';
 import {selectorRestaurentList} from 'src/redux/restaurent/selectors';
-import {getMessageError, scale, setHeight} from 'src/utils';
+import {fontScale, getMessageError, scale, setHeight} from 'src/utils';
 import {listSort} from './common';
 import {CategoryMenuItem, RestaurantMediumCard, RestaurentCard} from './components';
 import {styles} from './styles';
@@ -59,7 +59,7 @@ const HomeScreen: React.FC = () => {
           <TextBase style={styles.selectedLocationText}>HOME</TextBase>
           <MaterialIcons name="keyboard-arrow-down" size={16} color={Colors.DEFAULT_YELLOW} />
           <Feather
-            size={24}
+            size={fontScale(24)}
             name="bell"
             color={Colors.DEFAULT_WHITE}
             style={{position: 'absolute', right: 0}}

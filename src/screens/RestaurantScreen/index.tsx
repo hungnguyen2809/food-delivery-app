@@ -1,6 +1,7 @@
-import {useRoute} from '@react-navigation/native';
+import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useMemo, useState} from 'react';
 import {FlatList, Image, ScrollView, StatusBar, TouchableOpacity, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StaticImageApi, STATIC_IMAGE} from 'src/api';
@@ -8,16 +9,19 @@ import {useAppDispatch} from 'src/app/hooks';
 import {Separator, TextBase, ToastSnackbar} from 'src/components';
 import {Colors, Images} from 'src/constants';
 import {actionRestaurentGetOne} from 'src/redux/restaurent/actions';
-import {getMessageError, setHeight} from 'src/utils';
+import {getMessageError, scale, setHeight} from 'src/utils';
 import {CategoryListItem, FoodCard, ListFooter, ListHeader} from './components';
 import {styles} from './styles';
 
-type ParamsRoute = Readonly<{restaurentId: string}> | undefined;
+type ParamsRoute = Readonly<{restaurentId?: string}> | undefined;
 
 const RestaurantScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const params = useMemo(() => route.params, [route]) as ParamsRoute;
+  const insets = useSafeAreaInsets();
+
+  const params = useMemo((): ParamsRoute => route.params, [route]);
+  const navigation = useNavigation<NavigationProp<any>>();
 
   const [restaurant, setRestaurant] = useState<Restaurent.RestaurentFood>();
   const [selectedCategory, setSelectedCategory] = useState<string>();
@@ -60,7 +64,13 @@ const RestaurantScreen: React.FC = () => {
       />
 
       <ScrollView>
-        <Separator height={setHeight(35)} />
+        <View style={[styles.mainButtonBack, {top: insets.top}]}>
+          <TouchableOpacity onPress={navigation.goBack} style={styles.containerButtonBack}>
+            <Ionicons name="chevron-back-outline" size={scale(30)} />
+          </TouchableOpacity>
+        </View>
+
+        <Separator height={setHeight(30)} />
 
         <View style={styles.mainContainer}>
           <View style={styles.titleContainer}>

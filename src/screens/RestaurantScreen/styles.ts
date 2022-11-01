@@ -13,6 +13,19 @@ export const styles = StyleSheet.create({
     height: setWidth(100),
     width: setWidth(100),
   },
+  mainButtonBack: {
+    alignItems: 'flex-start',
+  },
+  containerButtonBack: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: scale(20),
+    width: scale(40),
+    height: scale(40),
+    borderRadius: 40,
+    opacity: 0.8,
+    backgroundColor: Colors.DARK_FIVE,
+  },
   mainContainer: {
     backgroundColor: Colors.SECONDARY_WHITE,
     borderTopLeftRadius: scale(32),
