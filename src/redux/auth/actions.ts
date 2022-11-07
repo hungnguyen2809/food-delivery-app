@@ -1,6 +1,6 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {appRequest, APP_PATH} from 'src/api';
-import {getMessageError, removeDataStorage, setDataStorage, STORAGE_KEY} from 'src/utils';
+import {removeDataStorage, setDataStorage, STORAGE_KEY} from 'src/utils';
 
 const PREFIX = 'auth';
 
@@ -14,13 +14,13 @@ export const actionAuthLogin = createAsyncThunk(
     try {
       const {data} = await appRequest.post<BaseResponse<Auth.UserInfo>>(APP_PATH.login, payload);
       if (data.status) {
-        throw rejectWithValue(data);
+        return rejectWithValue(data);
       }
       await setDataStorage(STORAGE_KEY.ACCESS_TOKEN, data.data.token);
       await setDataStorage(STORAGE_KEY.USER_INFO, data.data);
       return data.data;
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );
@@ -33,7 +33,7 @@ export const actionAuthLogout = createAsyncThunk(
       await removeDataStorage(STORAGE_KEY.USER_INFO);
       dispatch(actionAuthSetUserInfo(undefined));
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );
@@ -44,11 +44,11 @@ export const actionAuthRegister = createAsyncThunk(
     try {
       const {data} = await appRequest.post<BaseResponse>(APP_PATH.register, payload);
       if (data.status) {
-        throw rejectWithValue(data);
+        return rejectWithValue(data);
       }
       return data.data;
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );
@@ -59,11 +59,11 @@ export const actionAuthGetUserInfo = createAsyncThunk(
     try {
       const {data} = await appRequest.get<BaseResponse>(APP_PATH.getInfo, {params: payload});
       if (data.status) {
-        throw rejectWithValue(data);
+        return rejectWithValue(data);
       }
       return data.data;
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );

@@ -7,4 +7,8 @@ export const APP_PATH = {
   //restaurent
   restaurentGetAll: '/api/v1/restaurent/get-all',
   restaurentGetById: '/api/v1/restaurent/get-by-id',
+  //cart
+  getCart: '/api/v1/cart',
+  addToCart: '/api/v1/cart/add',
+  removeFormCart: '/api/v1/cart/remove',
 };

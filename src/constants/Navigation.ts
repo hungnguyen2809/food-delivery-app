@@ -1,6 +1,4 @@
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-
-export const DEFAULT_OPTION: NativeStackNavigationOptions = {
+export const DEFAULT_OPTION = {
   headerShown: false,
 };
 
@@ -14,6 +12,8 @@ export enum SCREEN_NAME {
   RegisterPhoneScreen = 'RegisterPhoneScreen',
   VerificationScreen = 'VerificationScreen',
 
+  HomeBottomTabs = 'HomeBottomTabs',
   HomeScreen = 'HomeScreen',
+  CartScreen = 'CartScreen',
   RestaurantScreen = 'RestaurantScreen',
 }

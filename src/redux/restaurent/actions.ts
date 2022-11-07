@@ -1,6 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {appRequest, APP_PATH} from 'src/api';
-import {getMessageError} from 'src/utils';
 
 const PREFIX = 'restaurent';
 
@@ -12,12 +11,12 @@ export const actionRestaurentList = createAsyncThunk(
         APP_PATH.restaurentGetAll,
       );
       if (data.status) {
-        throw rejectWithValue(data);
+        return rejectWithValue(data);
       }
 
       return data.data;
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );
@@ -35,7 +34,7 @@ export const actionRestaurentGetOne = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      throw new Error(getMessageError(error));
+      throw error;
     }
   },
 );

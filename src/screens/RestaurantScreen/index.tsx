@@ -7,10 +7,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StaticImageApi, STATIC_IMAGE} from 'src/api';
 import {useAppDispatch} from 'src/app/hooks';
 import {Separator, TextBase, ToastSnackbar} from 'src/components';
+import FoodCard from 'src/components/FoodCard';
 import {Colors, Images} from 'src/constants';
+import {actionCartGetAll} from 'src/redux/cart/actions';
 import {actionRestaurentGetOne} from 'src/redux/restaurent/actions';
 import {getMessageError, scale, setHeight} from 'src/utils';
-import {CategoryListItem, FoodCard, ListFooter, ListHeader} from './components';
+import {CategoryListItem, ListFooter, ListHeader} from './components';
 import {styles} from './styles';
 
 type ParamsRoute = Readonly<{restaurentId?: string}> | undefined;
@@ -26,6 +28,13 @@ const RestaurantScreen: React.FC = () => {
   const [restaurant, setRestaurant] = useState<Restaurent.RestaurentFood>();
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    const promise = dispatch(actionCartGetAll());
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     if (params?.restaurentId) {

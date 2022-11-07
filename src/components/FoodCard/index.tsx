@@ -1,24 +1,40 @@
-import React, {useState} from 'react';
+import React, {useMemo} from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {StaticImageApi, STATIC_IMAGE} from 'src/api';
-import {TextBase} from 'src/components';
+import {useAppDispatch, useAppSelector} from 'src/app/hooks';
+import {TextBase, ToastSnackbar} from 'src/components';
 import {Colors, Fonts} from 'src/constants';
-import {fontScale, scale, setWidth} from 'src/utils';
+import {actionCartAdd, actionCartRemove} from 'src/redux/cart/actions';
+import {selectorCartItems} from 'src/redux/cart/selectors';
+import {fontScale, getMessageError, scale, setWidth} from 'src/utils';
 
 type Props = {
   row: Restaurent.FoodRow;
 };
 
 const FoodCard: React.FC<Props> = ({row}) => {
-  const [itemCount, setItemCount] = useState(0);
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(selectorCartItems);
 
-  const removeFromCart = () => {
-    setItemCount(itemCount - 1);
+  const itemCount = useMemo(() => {
+    return cartItems.find((item) => item.foodId === row.id)?.quantity || 0;
+  }, [cartItems, row.id]);
+
+  const addToCart = async () => {
+    try {
+      await dispatch(actionCartAdd({foodId: row.id || ''})).unwrap();
+    } catch (error) {
+      ToastSnackbar.open(getMessageError(error));
+    }
   };
 
-  const addFromCart = () => {
-    setItemCount(itemCount + 1);
+  const removeFormCart = async () => {
+    try {
+      await dispatch(actionCartRemove({foodId: row.id || ''})).unwrap();
+    } catch (error) {
+      ToastSnackbar.open(getMessageError(error));
+    }
   };
 
   return (
@@ -47,13 +63,13 @@ const FoodCard: React.FC<Props> = ({row}) => {
           <View style={styles.itemAddContainer}>
             {itemCount > 0 ? (
               <>
-                <TouchableOpacity onPress={removeFromCart}>
+                <TouchableOpacity onPress={removeFormCart}>
                   <AntDesign size={18} name="minus" color={Colors.DEFAULT_YELLOW} />
                 </TouchableOpacity>
                 <TextBase style={styles.itemCountText}>{itemCount}</TextBase>
               </>
             ) : null}
-            <TouchableOpacity onPress={addFromCart}>
+            <TouchableOpacity onPress={addToCart}>
               <AntDesign name="plus" color={Colors.DEFAULT_YELLOW} size={18} />
             </TouchableOpacity>
           </View>
