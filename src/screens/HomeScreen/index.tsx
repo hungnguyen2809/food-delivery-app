@@ -10,7 +10,7 @@ import {Separator, TextBase, ToastSnackbar} from 'src/components';
 import {Colors, General, SCREEN_NAME} from 'src/constants';
 import {actionRestaurentList} from 'src/redux/restaurent/actions';
 import {selectorRestaurentList} from 'src/redux/restaurent/selectors';
-import {fontScale, getMessageError, scale, setHeight} from 'src/utils';
+import {fontScale, getMessageError, scale} from 'src/utils';
 import {listSort} from './common';
 import {CategoryMenuItem, RestaurantMediumCard, RestaurentCard} from './components';
 import {styles} from './styles';
@@ -129,7 +129,7 @@ const HomeScreen: React.FC = () => {
         {listRestaurent?.map((item) => (
           <RestaurantMediumCard key={item?.id} row={item} />
         ))}
-        <Separator height={setHeight(5)} />
+        <Separator height={scale(100)} />
       </ScrollView>
     </View>
   );

@@ -1,16 +1,16 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors, DEFAULT_OPTION, SCREEN_NAME} from 'src/constants';
 import {CartScreen, HomeScreen} from 'src/screens';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {scale, setHeight} from 'src/utils';
+import {scale} from 'src/utils';
 
 const Tabs = createBottomTabNavigator();
 
 type TabBarIconProp = {focused: boolean; color: string; size: number};
 
 const HomeIcon = ({color}: TabBarIconProp) => {
-  return <Ionicons name="home-outline" size={scale(25)} color={color} />;
+  return <Ionicons name="home-outline" size={scale(23)} color={color} />;
 };
 
 const CartIcon = ({color}: TabBarIconProp) => {
@@ -25,7 +25,7 @@ const HomeTabs: React.FC = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           borderTopWidth: 0,
-          height: setHeight(8),
+          height: scale(70),
           position: 'absolute',
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,

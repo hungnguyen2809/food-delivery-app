@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     width: 2000,
     borderRadius: 2000,
     position: 'absolute',
-    top: -1 * (2000 - scale(220)),
+    top: -1 * (2000 - scale(230)),
     alignSelf: 'center',
     zIndex: -1,
   },

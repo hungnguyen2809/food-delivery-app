@@ -9,7 +9,7 @@ import {Separator, TextBase} from 'src/components';
 import FoodCard from 'src/components/FoodCard';
 import {Colors, Images} from 'src/constants';
 import {selectorCartItems, selectorCartMeta} from 'src/redux/cart/selectors';
-import {setHeight} from 'src/utils';
+import {scale} from 'src/utils';
 import {styles} from './styles';
 
 const CartScreen: React.FC = () => {
@@ -73,7 +73,7 @@ const CartScreen: React.FC = () => {
             </View>
             <TextBase style={styles.checkoutText}>$ {cartMeta?.grandTotal?.toFixed(2)}</TextBase>
           </TouchableOpacity>
-          <Separator height={setHeight(9)} />
+          <Separator height={scale(100)} />
         </ScrollView>
       ) : (
         <View style={styles.emptyCartContainer}>
@@ -85,7 +85,7 @@ const CartScreen: React.FC = () => {
             <AntDesign name="plus" color={Colors.DEFAULT_WHITE} size={20} />
             <TextBase style={styles.addButtonEmptyText}>Add Food</TextBase>
           </TouchableOpacity>
-          <Separator height={setHeight(15)} />
+          <Separator height={scale(100)} />
         </View>
       )}
     </View>
