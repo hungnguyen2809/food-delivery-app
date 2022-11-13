@@ -11,4 +11,6 @@ export const APP_PATH = {
   getCart: '/api/v1/cart',
   addToCart: '/api/v1/cart/add',
   removeFormCart: '/api/v1/cart/remove',
+  //food
+  foodGet: '/api/v1/food',
 };

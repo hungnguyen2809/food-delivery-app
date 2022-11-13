@@ -1,4 +1,5 @@
 import CartScreen from './CartScreen';
+import FoodScreen from './FoodScreen';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
 import HomeScreen from './HomeScreen';
 import RegisterPhoneScreen from './RegisterPhoneScreen';
@@ -20,4 +21,5 @@ export {
   HomeScreen,
   RestaurantScreen,
   CartScreen,
+  FoodScreen,
 };

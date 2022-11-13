@@ -1,9 +1,10 @@
 import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
-import React, {useMemo, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {StatusBar, TextInput, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Separator, TextBase} from 'src/components';
 import {Colors} from 'src/constants';
+import {useParamsRoute} from 'src/hooks';
 import {DeviceUtils} from 'src/utils';
 import {styles} from './styles';
 
@@ -13,8 +14,8 @@ type ParamsRoute = {
 
 const VerificationScreen: React.FC = () => {
   const route = useRoute();
+  const params = useParamsRoute<ParamsRoute>(route);
   const navigation = useNavigation<NavigationProp<any>>();
-  const params = useMemo(() => route.params, [route.params]) as Readonly<ParamsRoute | undefined>;
 
   const firstInput = useRef<TextInput>(null);
   const secondInput = useRef<TextInput>(null);

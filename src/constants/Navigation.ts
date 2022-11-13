@@ -16,4 +16,5 @@ export enum SCREEN_NAME {
   HomeScreen = 'HomeScreen',
   CartScreen = 'CartScreen',
   RestaurantScreen = 'RestaurantScreen',
+  FoodScreen = 'FoodScreen',
 }

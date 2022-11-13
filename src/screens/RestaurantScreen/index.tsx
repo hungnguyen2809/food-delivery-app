@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Image, ScrollView, StatusBar, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -8,7 +8,8 @@ import {StaticImageApi, STATIC_IMAGE} from 'src/api';
 import {useAppDispatch} from 'src/app/hooks';
 import {Separator, TextBase, ToastSnackbar} from 'src/components';
 import FoodCard from 'src/components/FoodCard';
-import {Colors, Images} from 'src/constants';
+import {Colors, Images, SCREEN_NAME} from 'src/constants';
+import {useParamsRoute} from 'src/hooks';
 import {actionCartGetAll} from 'src/redux/cart/actions';
 import {actionRestaurentGetOne} from 'src/redux/restaurent/actions';
 import {getMessageError, scale, setHeight} from 'src/utils';
@@ -19,10 +20,10 @@ type ParamsRoute = Readonly<{restaurentId?: string}> | undefined;
 
 const RestaurantScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const route = useRoute();
-  const insets = useSafeAreaInsets();
 
-  const params = useMemo((): ParamsRoute => route.params, [route]);
+  const insets = useSafeAreaInsets();
+  const route = useRoute();
+  const params = useParamsRoute<ParamsRoute>(route);
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [restaurant, setRestaurant] = useState<Restaurent.RestaurentFood>();
@@ -56,6 +57,10 @@ const RestaurantScreen: React.FC = () => {
     } else {
       setIsBookmarked(true);
     }
+  };
+
+  const handleNavigateFood = (foodId: string) => {
+    navigation.navigate(SCREEN_NAME.FoodScreen, {foodId: foodId});
   };
 
   return (
@@ -143,11 +148,7 @@ const RestaurantScreen: React.FC = () => {
             {restaurant?.foods
               ?.filter((food) => food?.category === selectedCategory)
               ?.map((item) => (
-                <FoodCard
-                  key={item?.id}
-                  row={item}
-                  // navigate={() => navigation.navigate('Food', {foodId: item?.id})}
-                />
+                <FoodCard key={item?.id} row={item} navigate={handleNavigateFood} />
               ))}
             <Separator height={setHeight(2)} />
           </View>

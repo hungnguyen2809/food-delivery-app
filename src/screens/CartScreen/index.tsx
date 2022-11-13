@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useAppSelector} from 'src/app/hooks';
 import {Separator, TextBase} from 'src/components';
 import FoodCard from 'src/components/FoodCard';
-import {Colors, Images} from 'src/constants';
+import {Colors, Images, SCREEN_NAME} from 'src/constants';
 import {selectorCartItems, selectorCartMeta} from 'src/redux/cart/selectors';
 import {scale} from 'src/utils';
 import {styles} from './styles';
@@ -17,6 +17,10 @@ const CartScreen: React.FC = () => {
 
   const cartItems = useAppSelector(selectorCartItems);
   const cartMeta = useAppSelector(selectorCartMeta);
+
+  const handleNavigateFood = (foodId: string) => {
+    navigation.navigate(SCREEN_NAME.FoodScreen, {foodId: foodId});
+  };
 
   return (
     <View style={styles.container}>
@@ -34,7 +38,7 @@ const CartScreen: React.FC = () => {
         <ScrollView>
           <View style={styles.foodList}>
             {cartItems.map((item) => (
-              <FoodCard key={item.food.id} row={item.food} />
+              <FoodCard key={item.food.id} row={item.food} navigate={handleNavigateFood} />
             ))}
           </View>
 

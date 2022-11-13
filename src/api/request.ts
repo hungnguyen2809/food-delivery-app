@@ -23,7 +23,7 @@ const configure = (config: AxiosRequestConfig) => {
 const configureErr = (error: AxiosError<BaseResponse>) => {
   const status = error.response?.status;
   const data = error.response?.data;
-  if (data && STATUS_ERROR.includes(status as number)) {
+  if (data && status && STATUS_ERROR.includes(status)) {
     store.dispatch(actionAuthLogout());
     return data;
   }

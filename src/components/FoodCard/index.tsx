@@ -11,9 +11,10 @@ import {fontScale, getMessageError, scale, setWidth} from 'src/utils';
 
 type Props = {
   row: Restaurent.FoodRow;
+  navigate?: (foodId: string) => void;
 };
 
-const FoodCard: React.FC<Props> = ({row}) => {
+const FoodCard: React.FC<Props> = ({row, navigate}) => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectorCartItems);
 
@@ -37,9 +38,13 @@ const FoodCard: React.FC<Props> = ({row}) => {
     }
   };
 
+  const handleNavigate = () => {
+    navigate?.(row?.id || '');
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.8}>
+      <TouchableOpacity activeOpacity={0.8} onPress={handleNavigate}>
         <Image
           style={styles.image}
           source={{
@@ -49,7 +54,7 @@ const FoodCard: React.FC<Props> = ({row}) => {
       </TouchableOpacity>
 
       <View style={styles.detailsContainer}>
-        <TouchableOpacity activeOpacity={0.8}>
+        <TouchableOpacity activeOpacity={0.8} onPress={handleNavigate}>
           <TextBase numberOfLines={1} style={styles.titleText}>
             {row.name}
           </TextBase>
